@@ -17,7 +17,7 @@ export default function Footer({ t, scrollTo }) {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <img 
-                src="/axeonsoft-round-logo.png" 
+                src={`${import.meta.env.BASE_URL}axeonsoft-round-logo.png`} 
                 alt="Axeonsoft Logo" 
                 className="w-10 h-10 rounded-full object-contain p-0.5 bg-slate-900 border border-[#fec003]/40 shadow-md shadow-[#fec003]/20"
               />
@@ -41,7 +41,7 @@ export default function Footer({ t, scrollTo }) {
                 className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#fec003]/10 border border-[#fec003]/30 text-[#fec003] text-xs hover:bg-[#fec003]/20 transition-all group"
               >
                 <img 
-                  src="/logo-catbox.png" 
+                  src={`${import.meta.env.BASE_URL}logo-catbox.png`} 
                   alt="Catbox Studio" 
                   className="w-5 h-5 object-contain rounded shrink-0 group-hover:scale-110 transition-transform" 
                 />
@@ -97,7 +97,7 @@ export default function Footer({ t, scrollTo }) {
                   rel="noopener noreferrer" 
                   className="text-[#fec003] hover:text-[#ffd033] font-bold flex items-center gap-1.5"
                 >
-                  <img src="/logo-catbox.png" alt="Catbox" className="w-4 h-4 object-contain rounded shrink-0" />
+                  <img src={`${import.meta.env.BASE_URL}logo-catbox.png`} alt="Catbox" className="w-4 h-4 object-contain rounded shrink-0" />
                   <span>Catbox Studio Games</span>
                 </a>
               </li>

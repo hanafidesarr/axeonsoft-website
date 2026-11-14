@@ -34,7 +34,7 @@ export default function GamesSection({ t, lang }) {
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-[#fec003] to-amber-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-75 transition duration-300"></div>
               <img 
-                src="/logo-catbox.png" 
+                src={`${import.meta.env.BASE_URL}logo-catbox.png`} 
                 alt="Catbox Studio Logo" 
                 className="relative h-20 sm:h-24 object-contain rounded-xl p-1 bg-slate-900/80 border border-[#fec003]/30 shadow-2xl"
               />

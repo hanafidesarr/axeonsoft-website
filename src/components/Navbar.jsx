@@ -83,7 +83,7 @@ export default function Navbar({ lang, setLang, t }) {
           >
             <div className="relative">
               <img 
-                src="/axeonsoft-round-logo.png" 
+                src={`${import.meta.env.BASE_URL}axeonsoft-round-logo.png`} 
                 alt="Axeonsoft Logo" 
                 className="w-10 h-10 rounded-full object-contain p-0.5 bg-slate-900 border border-[#fec003]/40 group-hover:border-[#fec003] group-hover:scale-105 transition-all shadow-md shadow-[#fec003]/20"
               />
@@ -119,7 +119,7 @@ export default function Navbar({ lang, setLang, t }) {
                 >
                   {item.isGame ? (
                     <img 
-                      src="/logo-catbox.png" 
+                      src={`${import.meta.env.BASE_URL}logo-catbox.png`} 
                       alt="Catbox" 
                       className="w-4 h-4 rounded object-contain shrink-0" 
                     />
@@ -193,7 +193,7 @@ export default function Navbar({ lang, setLang, t }) {
                   >
                     <div className="flex items-center gap-2.5">
                       {item.isGame ? (
-                        <img src="/logo-catbox.png" alt="Catbox" className="w-5 h-5 rounded object-contain shrink-0" />
+                        <img src={`${import.meta.env.BASE_URL}logo-catbox.png`} alt="Catbox" className="w-5 h-5 rounded object-contain shrink-0" />
                       ) : item.icon ? (
                         <item.icon className="w-4 h-4 text-[#fec003]" />
                       ) : null}
