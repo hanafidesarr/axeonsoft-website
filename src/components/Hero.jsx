@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
   MessageSquare, 
@@ -6,9 +7,9 @@ import {
 } from 'lucide-react';
 import { officialWaLink, officialPhoneDisplay } from '../data/translations';
 
-export default function Hero({ t, scrollTo }) {
+export default function Hero({ t, isHomePage = true }) {
   return (
-    <section id="hero" className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-[90vh] pt-32 pb-20 flex flex-col justify-center overflow-hidden">
       {/* Background Glows and Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(254,192,3,0.15),rgba(255,255,255,0))] pointer-events-none" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#fec003]/10 blur-[140px] rounded-full pointer-events-none" />
@@ -48,13 +49,13 @@ export default function Hero({ t, scrollTo }) {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <button
-              onClick={() => scrollTo('catalog')}
+            <Link
+              to="/catalog"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-base font-bold text-slate-950 bg-[#fec003] hover:bg-[#ffd033] shadow-xl shadow-[#fec003]/25 hover:shadow-[#fec003]/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
               <span>{t.hero.ctaPrimary}</span>
               <ArrowRight className="w-5 h-5 text-slate-950" />
-            </button>
+            </Link>
 
             <a
               href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20tertarik%20dengan%20layanan%20Anda`}
@@ -84,11 +85,9 @@ export default function Hero({ t, scrollTo }) {
             ))}
           </div>
 
-          {/* Social Proof statement */}
-          <div className="mt-10 text-xs sm:text-sm text-slate-400 flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#fec003] shrink-0" />
-            <span>{t.hero.trustedBy}</span>
-          </div>
+          <p className="text-xs text-slate-500 mt-6 tracking-wide">
+            {t.hero.trustedBy}
+          </p>
 
         </div>
       </div>

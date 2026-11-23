@@ -1,10 +1,27 @@
 import React from 'react';
-import { ArrowUp, Gamepad2 } from 'lucide-react';
-import { socialLinks, officialWaLink } from '../data/translations';
+import { Link } from 'react-router-dom';
+import { ArrowUp, Gamepad2, ShoppingBag, Calendar, Layers, Sparkles, MessageSquare } from 'lucide-react';
+import { socialLinks, officialWaLink, officialPhoneDisplay } from '../data/translations';
+import {
+  InstagramIcon,
+  YoutubeIcon,
+  TiktokIcon,
+  WhatsAppIcon
+} from './SocialIcons';
 
-export default function Footer({ t, scrollTo }) {
+export default function Footer({ t }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderSocialIcon = (iconName) => {
+    switch (iconName) {
+      case 'MessageSquare': return <WhatsAppIcon className="w-4 h-4" />;
+      case 'Instagram': return <InstagramIcon className="w-4 h-4" />;
+      case 'Youtube': return <YoutubeIcon className="w-4 h-4" />;
+      case 'Video': return <TiktokIcon className="w-4 h-4" />;
+      default: return null;
+    }
   };
 
   return (
@@ -15,11 +32,13 @@ export default function Footer({ t, scrollTo }) {
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
+            <Link to="/" className="inline-flex items-center gap-3">
               <img 
-                src={`${import.meta.env.BASE_URL}axeonsoft-round-logo.png`} 
+                src="/axeonsoft-round-logo.png" 
                 alt="Axeonsoft Logo" 
                 className="w-10 h-10 rounded-full object-contain p-0.5 bg-slate-900 border border-[#fec003]/40 shadow-md shadow-[#fec003]/20"
+                width="40"
+                height="40"
               />
               <div>
                 <span className="text-lg font-bold text-white tracking-tight">Axeonsoft</span>
@@ -27,7 +46,7 @@ export default function Footer({ t, scrollTo }) {
                   Software House & Solutions
                 </span>
               </div>
-            </div>
+            </Link>
 
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
               Empowering modern brands with high-performance digital product catalogs, automated online bookings, high-converting landing pages, and interactive web games.
@@ -41,124 +60,122 @@ export default function Footer({ t, scrollTo }) {
                 className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#fec003]/10 border border-[#fec003]/30 text-[#fec003] text-xs hover:bg-[#fec003]/20 transition-all group"
               >
                 <img 
-                  src={`${import.meta.env.BASE_URL}logo-catbox.png`} 
+                  src="/logo-catbox.png" 
                   alt="Catbox Studio" 
                   className="w-5 h-5 object-contain rounded shrink-0 group-hover:scale-110 transition-transform" 
+                  width="20"
+                  height="20"
                 />
                 <span className="font-bold">{t.footer.gamingDivision}</span>
               </a>
             </div>
           </div>
 
-          {/* Quick Jump Navigation */}
+          {/* Dedicated Solution Pages */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Navigation
+              Solutions
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <button onClick={() => scrollTo('hero')} className="hover:text-[#fec003] transition-colors">
+                <Link to="/catalog" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                  <ShoppingBag className="w-3.5 h-3.5 text-[#fec003]" />
+                  <span>{t.nav.catalog}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/booking" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-blue-400" />
+                  <span>{t.nav.booking}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/landing-page" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t.nav.landingPage}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/games" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                  <Gamepad2 className="w-3.5 h-3.5 text-amber-400" />
+                  <span>{t.nav.games}</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company & Support */}
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
+              Company
+            </h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/" className="hover:text-[#fec003] transition-colors">
                   {t.nav.home}
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollTo('catalog')} className="hover:text-[#fec003] transition-colors">
-                  {t.nav.catalog}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('booking')} className="hover:text-[#fec003] transition-colors">
-                  {t.nav.booking}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('landing-page')} className="hover:text-[#fec003] transition-colors">
-                  {t.nav.landingPage}
-                </button>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('why-us')} className="hover:text-[#fec003] transition-colors">
+                <Link to="/why-us" className="hover:text-[#fec003] transition-colors">
                   {t.nav.whyUs}
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Solutions & Games */}
-          <div>
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Gaming & Hubs
-            </h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a 
-                  href="https://catbox.axeonsoft.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-[#fec003] hover:text-[#ffd033] font-bold flex items-center gap-1.5"
-                >
-                  <img src={`${import.meta.env.BASE_URL}logo-catbox.png`} alt="Catbox" className="w-4 h-4 object-contain rounded shrink-0" />
-                  <span>Catbox Studio Games</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <button onClick={() => scrollTo('games')} className="hover:text-[#fec003] transition-colors">
-                  Game Showcase
-                </button>
-              </li>
-              <li>
-                <a 
-                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20konsultasi%20pembuatan%20game%20web`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-[#fec003] transition-colors"
-                >
-                  Custom Brand Gamification
-                </a>
-              </li>
-              <li>
-                <button onClick={() => scrollTo('contact')} className="hover:text-[#fec003] transition-colors">
+                <Link to="/contact" className="hover:text-[#fec003] transition-colors">
                   {t.nav.contact}
-                </button>
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20konsultasi`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#fec003] hover:underline font-semibold"
+                >
+                  WhatsApp ({officialPhoneDisplay})
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Social Channels (WhatsApp, Instagram, YouTube, TikTok) */}
+          {/* Social Channels */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
               Official Channels
             </h4>
-            <div className="flex flex-col gap-2">
-              {socialLinks.map((soc, idx) => (
+            <div className="flex flex-wrap gap-2.5">
+              {socialLinks.map((s, idx) => (
                 <a
                   key={idx}
-                  href={soc.url}
+                  href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-[#fec003]/40 hover:text-[#fec003] transition-all text-xs font-medium flex items-center justify-between"
+                  title={s.name}
+                  className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-[#fec003] hover:border-[#fec003]/40 transition-colors"
                 >
-                  <span>{soc.name}</span>
-                  <span className="text-[10px] text-slate-500 font-mono">{soc.handle}</span>
+                  {renderSocialIcon(s.icon)}
                 </a>
               ))}
             </div>
+            <p className="text-[11px] text-slate-400 mt-4 leading-relaxed">
+              Jakarta, Indonesia. Serving forward-thinking global businesses.
+            </p>
           </div>
 
         </div>
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-400 text-[11px] text-center sm:text-left">
-            {t.footer.copyright} • {t.footer.disclaimer}
+          <p className="text-slate-400 text-xs text-center sm:text-left">
+            {t.footer.copyright} {t.footer.disclaimer}
           </p>
 
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-[#fec003] transition-all text-xs"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-[#fec003]/40 text-slate-300 hover:text-[#fec003] transition-colors"
           >
             <span>{t.footer.backToTop}</span>
-            <ArrowUp className="w-3.5 h-3.5 text-[#fec003]" />
+            <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
 
