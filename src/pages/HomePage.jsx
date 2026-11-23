@@ -174,6 +174,84 @@ export default function HomePage({ t, lang }) {
         </div>
       </section>
 
+      {/* 2.5 Featured Catbox Studio Games Showcase */}
+      <section className="py-20 relative bg-[#060a13] border-t border-slate-800/80 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#fec003]/10 border border-[#fec003]/30 text-[#fec003] text-xs font-bold mb-3">
+                <Gamepad2 className="w-3.5 h-3.5 animate-pulse" />
+                <span>{lang === 'en' ? 'Gaming Division • Instant Play' : 'Divisi Game • Mainkan Instan'}</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                {t.gamesSection.featuredBadge}
+              </h2>
+            </div>
+            <Link
+              to="/games"
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#fec003] hover:text-white transition-colors"
+            >
+              <span>{lang === 'en' ? 'Explore all Catbox games' : 'Jelajahi semua game Catbox'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {t.gamesSection.gamesList.map((game, i) => (
+              <div 
+                key={i}
+                className="rounded-3xl bg-slate-900/60 border border-slate-800 p-5 flex flex-col justify-between hover:border-[#fec003]/50 transition-all hover:-translate-y-1 group relative overflow-hidden shadow-xl"
+              >
+                <div>
+                  {game.image && (
+                    <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-4 bg-slate-950 border border-slate-800">
+                      <img 
+                        src={game.image} 
+                        alt={`${game.title} - ${game.genre} Browser Game by Catbox Studio`} 
+                        loading="lazy" 
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width="360"
+                        height="176"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                      <span className="absolute top-3 left-3 text-[10px] font-mono font-bold tracking-widest uppercase px-2 py-0.5 rounded bg-slate-950/80 text-[#fec003] border border-[#fec003]/30 backdrop-blur-md">
+                        {game.tag}
+                      </span>
+                      <span className="absolute top-3 right-3 text-xs font-bold text-amber-300 bg-slate-950/80 px-2 py-0.5 rounded backdrop-blur-md">
+                        {game.rating}
+                      </span>
+                    </div>
+                  )}
+
+                  <h3 className="text-lg font-bold text-white group-hover:text-[#fec003] transition-colors mb-1">
+                    {game.title}
+                  </h3>
+                  <div className="text-xs text-[#fec003]/80 font-medium mb-2">
+                    {game.genre}
+                  </div>
+                  <p className="text-xs text-slate-400 line-clamp-2 mb-4">
+                    {game.desc}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800/80">
+                  <a
+                    href={game.playUrl || "https://catbox.axeonsoft.com/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-[#fec003] text-white hover:text-slate-950 font-bold text-xs transition-all shadow-md"
+                  >
+                    <span>{lang === 'en' ? 'Play Instantly' : 'Mainkan Sekarang'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 3. Performance & Speed Highlights */}
       <section className="py-20 relative bg-[#090e1b] border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

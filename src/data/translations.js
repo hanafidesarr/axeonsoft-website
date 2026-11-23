@@ -107,6 +107,7 @@ export const content = {
           desc: "Complete business automation module with invoicing and real-time inventory.",
           rating: 4.9,
           badge: "Popular",
+          image: "/images/product-erp-cloud.jpg"
         },
         {
           id: 2,
@@ -116,6 +117,7 @@ export const content = {
           desc: "Industrial thermal printer, barcode reader, and Android 13 dual screens.",
           rating: 4.8,
           badge: "Hardware",
+          image: "/images/product-smart-pos.jpg"
         },
         {
           id: 3,
@@ -125,6 +127,7 @@ export const content = {
           desc: "Automated daily backups, DDoS protection, and 99.99% uptime guarantee.",
           rating: 5.0,
           badge: "Service",
+          image: "/images/product-devops-server.jpg"
         },
         {
           id: 4,
@@ -134,6 +137,7 @@ export const content = {
           desc: "Multi-agent customer support desk with auto-replies and broadcast tool.",
           rating: 4.9,
           badge: "Best Value",
+          image: "/images/product-whatsapp-bot.jpg"
         },
       ],
       packagesTitle: "E-Commerce Packages & Delivery Options",
@@ -339,7 +343,8 @@ export const content = {
           rating: "4.9 ★",
           tag: "Trending",
           desc: "Guide our cyberpunk cat across neon rooftops while dodging laser drones.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/cyber-meow-runner.jpg"
         },
         {
           title: "Pixel Dungeon Quest",
@@ -347,7 +352,8 @@ export const content = {
           rating: "4.8 ★",
           tag: "Retro Classic",
           desc: "Explore procedurally generated catacombs, loot epic treasures, and defeat bosses.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/pixel-dungeon-quest.jpg"
         },
         {
           title: "Speedy Galactic Racer",
@@ -355,7 +361,8 @@ export const content = {
           rating: "4.9 ★",
           tag: "3D WebGL",
           desc: "Hyper-fast spacecraft racing powered by modern WebGL graphics.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/speedy-galactic-racer.jpg"
         },
       ],
       brandGamificationTitle: "Why Brands Commission Web Games with Catbox",
@@ -589,6 +596,7 @@ export const content = {
           desc: "Modul otomasi bisnis lengkap dengan faktur, akuntansi, dan stok real-time.",
           rating: 4.9,
           badge: "Populer",
+          image: "/images/product-erp-cloud.jpg"
         },
         {
           id: 2,
@@ -598,6 +606,7 @@ export const content = {
           desc: "Printer termal industri, scanner barcode, dan dual layar Android 13.",
           rating: 4.8,
           badge: "Hardware",
+          image: "/images/product-smart-pos.jpg"
         },
         {
           id: 3,
@@ -607,6 +616,7 @@ export const content = {
           desc: "Backup harian otomatis, proteksi DDoS, dan garansi uptime 99.99%.",
           rating: 5.0,
           badge: "Layanan",
+          image: "/images/product-devops-server.jpg"
         },
         {
           id: 4,
@@ -616,6 +626,7 @@ export const content = {
           desc: "Meja bantuan multi-agen pelanggan dengan auto-reply dan broadcast pintar.",
           rating: 4.9,
           badge: "Terlaris",
+          image: "/images/product-whatsapp-bot.jpg"
         },
       ],
       packagesTitle: "Pilihan Paket & Implementasi E-Commerce",
@@ -821,7 +832,8 @@ export const content = {
           rating: "4.9 ★",
           tag: "Trending",
           desc: "Pandu kucing cyberpunk melompati atap berlampu neon sambil menghindari drone laser.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/cyber-meow-runner.jpg"
         },
         {
           title: "Pixel Dungeon Quest",
@@ -829,7 +841,8 @@ export const content = {
           rating: "4.8 ★",
           tag: "Retro Klasik",
           desc: "Jelajahi labirin bawah tanah berliku, kumpulkan peti harta karun, dan lawan monster.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/pixel-dungeon-quest.jpg"
         },
         {
           title: "Speedy Galactic Racer",
@@ -837,7 +850,8 @@ export const content = {
           rating: "4.9 ★",
           tag: "3D WebGL",
           desc: "Balapan pesawat supersonik antar galaksi dengan grafis 3D WebGL yang halus.",
-          playUrl: "https://catbox.axeonsoft.com/"
+          playUrl: "https://catbox.axeonsoft.com/",
+          image: "/images/speedy-galactic-racer.jpg"
         },
       ],
       brandGamificationTitle: "Mengapa Brand Memilih Game Web Catbox",

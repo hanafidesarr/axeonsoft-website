@@ -159,14 +159,37 @@ export default function GamesPage({ t, lang }) {
                 className="rounded-3xl bg-slate-900/60 border border-slate-800 p-6 flex flex-col justify-between hover:border-[#fec003]/50 transition-all hover:-translate-y-1 group relative overflow-hidden shadow-xl"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-1 rounded bg-[#fec003]/10 text-[#fec003] border border-[#fec003]/20">
-                      {game.tag}
-                    </span>
-                    <span className="text-xs font-bold text-amber-300">
-                      {game.rating}
-                    </span>
-                  </div>
+                  {game.image && (
+                    <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-5 bg-slate-950 border border-slate-800">
+                      <img 
+                        src={game.image} 
+                        alt={`${game.title} - ${game.genre} Browser Game by Catbox Studio Axeonsoft`} 
+                        loading="lazy" 
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width="400"
+                        height="176"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                      <span className="absolute top-3 left-3 text-[10px] font-mono font-bold tracking-widest uppercase px-2 py-0.5 rounded bg-slate-950/80 text-[#fec003] border border-[#fec003]/30 backdrop-blur-md">
+                        {game.tag}
+                      </span>
+                      <span className="absolute top-3 right-3 text-xs font-bold text-amber-300 bg-slate-950/80 px-2 py-0.5 rounded backdrop-blur-md">
+                        {game.rating}
+                      </span>
+                    </div>
+                  )}
+
+                  {!game.image && (
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-1 rounded bg-[#fec003]/10 text-[#fec003] border border-[#fec003]/20">
+                        {game.tag}
+                      </span>
+                      <span className="text-xs font-bold text-amber-300">
+                        {game.rating}
+                      </span>
+                    </div>
+                  )}
 
                   <h3 className="text-lg font-bold text-white group-hover:text-[#fec003] transition-colors mb-1">
                     {game.title}

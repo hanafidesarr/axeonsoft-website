@@ -162,9 +162,24 @@ export default function CatalogPage({ t, lang }) {
             {filteredProducts.map((product) => (
               <div 
                 key={product.id}
-                className="rounded-2xl bg-slate-950/60 border border-slate-800 p-5 flex flex-col justify-between hover:border-[#fec003]/40 transition-all hover:-translate-y-1 group"
+                className="rounded-2xl bg-slate-950/60 border border-slate-800 p-5 flex flex-col justify-between hover:border-[#fec003]/40 transition-all hover:-translate-y-1 group overflow-hidden"
               >
                 <div>
+                  {product.image && (
+                    <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-800/80">
+                      <img 
+                        src={product.image} 
+                        alt={`${product.name} - ${product.category} Axeonsoft`} 
+                        loading="lazy" 
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width="300"
+                        height="160"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-800 text-slate-300">
                       {product.category}
@@ -177,7 +192,7 @@ export default function CatalogPage({ t, lang }) {
                   <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-[#fec003] transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-slate-400 line-clamp-3 mb-4">
+                  <p className="text-xs text-slate-400 line-clamp-2 mb-4">
                     {product.desc}
                   </p>
                 </div>
