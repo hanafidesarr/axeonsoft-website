@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -6,6 +6,55 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ScrollToTop from './components/ScrollToTop';
 import PageLoader from './components/PageLoader';
 import { content } from './data/translations';
+
+// Smart language detection:
+// 1. Respect user manual preference if stored in localStorage
+// 2. Auto-detect Indonesian visitor via Indonesian Timezone (WIB, WITA, WIT) or browser language
+// 3. Default to English for international visitors
+const detectInitialLanguage = () => {
+  if (typeof window === 'undefined') return 'en';
+
+  // 1. Saved manual preference
+  try {
+    const saved = localStorage.getItem('axeon_lang');
+    if (saved === 'id' || saved === 'en') {
+      return saved;
+    }
+  } catch (e) {
+    // localStorage unavailable or restricted
+  }
+
+  // 2. Check Indonesian Timezones (WIB: Jakarta/Pontianak, WITA: Makassar, WIT: Jayapura)
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    const indonesianTimezones = [
+      'Asia/Jakarta',
+      'Asia/Pontianak',
+      'Asia/Makassar',
+      'Asia/Jayapura',
+      'Asia/Ujung_Pandang'
+    ];
+    if (indonesianTimezones.includes(tz)) {
+      return 'id';
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  // 3. Check browser locale preferences
+  try {
+    const languages = navigator.languages || [navigator.language || ''];
+    const isIndonesian = languages.some(l => l && l.toLowerCase().startsWith('id'));
+    if (isIndonesian) {
+      return 'id';
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  // 4. Default for international visitors
+  return 'en';
+};
 
 // Code-split pages for high performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -20,9 +69,29 @@ const GamesPage = lazy(() => import('./pages/GamesPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 export default function App() {
-  // Default language English ('en')
-  const [lang, setLang] = useState('en');
+  const [lang, setLang] = useState(detectInitialLanguage);
   const t = content[lang];
+
+  // Sync lang state with localStorage and document html tag
+  const handleSetLang = (action) => {
+    setLang(prev => {
+      const nextLang = typeof action === 'function' ? action(prev) : action;
+      try {
+        localStorage.setItem('axeon_lang', nextLang);
+      } catch (e) {
+        // ignore
+      }
+      return nextLang;
+    });
+  };
+
+  useEffect(() => {
+    try {
+      document.documentElement.lang = lang;
+    } catch (e) {
+      // ignore
+    }
+  }, [lang]);
 
   return (
     <BrowserRouter>
@@ -30,7 +99,7 @@ export default function App() {
         <ScrollToTop />
 
         {/* Global Navigation Bar */}
-        <Navbar lang={lang} setLang={setLang} t={t} />
+        <Navbar lang={lang} setLang={handleSetLang} t={t} />
 
         {/* Dynamic Route Pages */}
         <main className="flex-grow">
