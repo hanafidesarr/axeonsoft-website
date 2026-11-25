@@ -40,12 +40,16 @@ export default function SEO({
     };
 
     // Helper to create or update link tag
-    const setLink = (rel, href) => {
+    const setLink = (rel, href, hreflang = null) => {
       if (!href) return;
-      let el = document.querySelector(`link[rel="${rel}"]`);
+      const selector = hreflang 
+        ? `link[rel="${rel}"][hreflang="${hreflang}"]` 
+        : `link[rel="${rel}"]:not([hreflang])`;
+      let el = document.querySelector(selector);
       if (!el) {
         el = document.createElement('link');
         el.setAttribute('rel', rel);
+        if (hreflang) el.setAttribute('hreflang', hreflang);
         document.head.appendChild(el);
       }
       el.setAttribute('href', href);
@@ -57,8 +61,11 @@ export default function SEO({
     setMeta('name', 'keywords', keywords);
     setMeta('name', 'robots', 'index, follow');
 
-    // 4. Canonical
+    // 4. Canonical & Multi-Language Hreflang
     setLink('canonical', fullCanonical);
+    setLink('alternate', fullCanonical, 'en');
+    setLink('alternate', fullCanonical, 'id');
+    setLink('alternate', fullCanonical, 'x-default');
 
     // 5. Open Graph / Facebook
     setMeta('property', 'og:type', ogType);
@@ -67,6 +74,8 @@ export default function SEO({
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:image', fullOgImage);
     setMeta('property', 'og:site_name', 'Axeonsoft');
+    setMeta('property', 'og:locale', lang === 'id' ? 'id_ID' : 'en_US');
+    setMeta('property', 'og:locale:alternate', lang === 'id' ? 'en_US' : 'id_ID');
 
     // 6. Twitter Card
     setMeta('name', 'twitter:card', 'summary_large_image');
