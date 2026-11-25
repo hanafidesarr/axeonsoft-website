@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, ArrowLeft, Search, ShoppingBag, Calendar, Layers, Gamepad2 } from 'lucide-react';
+import { Home, ShoppingBag, Calendar, Store, Share2 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 export default function NotFoundPage({ t, lang }) {
@@ -36,25 +36,18 @@ export default function NotFoundPage({ t, lang }) {
             <span>{lang === 'en' ? 'Back to Home' : 'Kembali ke Beranda'}</span>
           </Link>
           <Link
-            to="/catalog"
+            to="/solutions/website-catalog"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700 transition-all"
           >
             <ShoppingBag className="w-4 h-4 text-[#fec003]" />
             <span>{t.nav.catalog}</span>
           </Link>
           <Link
-            to="/booking"
+            to="/solutions/online-booking"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700 transition-all"
           >
             <Calendar className="w-4 h-4 text-blue-400" />
             <span>{t.nav.booking}</span>
-          </Link>
-          <Link
-            to="/games"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700 transition-all"
-          >
-            <Gamepad2 className="w-4 h-4 text-amber-400" />
-            <span>{t.nav.games}</span>
           </Link>
         </div>
       </div>

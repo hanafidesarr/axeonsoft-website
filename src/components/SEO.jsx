@@ -21,7 +21,7 @@ export default function SEO({
 
   useEffect(() => {
     // 1. Title
-    const formattedTitle = title ? `${title} | Axeonsoft` : 'Axeonsoft - Professional Software House & Digital Solutions';
+    const formattedTitle = title ? (title.includes('Axeonsoft') ? title : `${title} | Axeonsoft`) : 'Axeonsoft - Digital Solutions Partner for Growing Businesses';
     document.title = formattedTitle;
 
     // 2. Set HTML lang
@@ -51,47 +51,44 @@ export default function SEO({
       el.setAttribute('href', href);
     };
 
-    // 3. Standard Meta
+    // 3. Meta Tags
+    setMeta('name', 'title', formattedTitle);
     setMeta('name', 'description', description);
-    if (keywords) setMeta('name', 'keywords', keywords);
+    setMeta('name', 'keywords', keywords);
+    setMeta('name', 'robots', 'index, follow');
 
     // 4. Canonical
     setLink('canonical', fullCanonical);
 
-    // 5. Open Graph
-    setMeta('property', 'og:title', formattedTitle);
-    setMeta('property', 'og:description', description);
+    // 5. Open Graph / Facebook
     setMeta('property', 'og:type', ogType);
     setMeta('property', 'og:url', fullCanonical);
+    setMeta('property', 'og:title', formattedTitle);
+    setMeta('property', 'og:description', description);
     setMeta('property', 'og:image', fullOgImage);
     setMeta('property', 'og:site_name', 'Axeonsoft');
-    setMeta('property', 'og:locale', lang === 'id' ? 'id_ID' : 'en_US');
 
     // 6. Twitter Card
     setMeta('name', 'twitter:card', 'summary_large_image');
+    setMeta('name', 'twitter:url', fullCanonical);
     setMeta('name', 'twitter:title', formattedTitle);
     setMeta('name', 'twitter:description', description);
     setMeta('name', 'twitter:image', fullOgImage);
 
-    // 7. Dynamic JSON-LD Schema
-    const schemaScriptId = 'page-json-ld-schema';
-    let scriptEl = document.getElementById(schemaScriptId);
+    // 7. Inject JSON-LD Structured Data Schema
+    let scriptEl = document.querySelector('script[type="application/ld+json"]#seo-schema');
     if (schema) {
       if (!scriptEl) {
         scriptEl = document.createElement('script');
-        scriptEl.id = schemaScriptId;
-        scriptEl.type = 'application/ld+json';
+        scriptEl.setAttribute('type', 'application/ld+json');
+        scriptEl.setAttribute('id', 'seo-schema');
         document.head.appendChild(scriptEl);
       }
       scriptEl.textContent = JSON.stringify(schema);
     } else if (scriptEl) {
       scriptEl.remove();
     }
-
-    return () => {
-      // Optional cleanup on unmount
-    };
-  }, [title, description, keywords, canonicalPath, ogImage, ogType, schema, lang, fullCanonical, fullOgImage]);
+  }, [title, description, keywords, canonicalPath, fullCanonical, fullOgImage, ogType, schema, lang]);
 
   return null;
 }

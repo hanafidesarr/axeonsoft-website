@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Gamepad2, ShoppingBag, Calendar, Layers, Sparkles, MessageSquare } from 'lucide-react';
-import { socialLinks, officialWaLink, officialPhoneDisplay } from '../data/translations';
+import { ArrowUp, ShoppingBag, Calendar, Store, Share2 } from 'lucide-react';
+import { socialLinks, officialWaLink, officialPhoneDisplay, officialEmail } from '../data/translations';
 import {
   InstagramIcon,
   YoutubeIcon,
@@ -43,13 +43,13 @@ export default function Footer({ t }) {
               <div>
                 <span className="text-lg font-bold text-white tracking-tight">Axeonsoft</span>
                 <span className="block text-[10px] uppercase tracking-widest text-[#fec003] font-semibold">
-                  Software House & Solutions
+                  {t.nav.brandSub}
                 </span>
               </div>
             </Link>
 
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
-              Empowering modern brands with high-performance digital product catalogs, automated online bookings, high-converting landing pages, and interactive web games.
+              {t.seo.home.description}
             </p>
 
             <div className="pt-2">
@@ -71,34 +71,34 @@ export default function Footer({ t }) {
             </div>
           </div>
 
-          {/* Dedicated Solution Pages */}
+          {/* Primary Solutions */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Solutions
+              {t.footer.primarySolutions}
             </h4>
             <ul className="space-y-2.5">
               <li>
-                <Link to="/catalog" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                <Link to="/solutions/website-catalog" className="hover:text-[#fec003] transition-colors flex items-center gap-2">
                   <ShoppingBag className="w-3.5 h-3.5 text-[#fec003]" />
                   <span>{t.nav.catalog}</span>
                 </Link>
               </li>
               <li>
-                <Link to="/booking" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
+                <Link to="/solutions/online-booking" className="hover:text-[#fec003] transition-colors flex items-center gap-2">
                   <Calendar className="w-3.5 h-3.5 text-blue-400" />
                   <span>{t.nav.booking}</span>
                 </Link>
               </li>
               <li>
-                <Link to="/landing-page" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{t.nav.landingPage}</span>
+                <Link to="/solutions/ecommerce" className="hover:text-[#fec003] transition-colors flex items-center gap-2">
+                  <Store className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t.nav.ecommerce}</span>
                 </Link>
               </li>
               <li>
-                <Link to="/games" className="hover:text-[#fec003] transition-colors flex items-center gap-1.5">
-                  <Gamepad2 className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{t.nav.games}</span>
+                <Link to="/solutions/social-media" className="hover:text-[#fec003] transition-colors flex items-center gap-2">
+                  <Share2 className="w-3.5 h-3.5 text-purple-400" />
+                  <span>{t.nav.socialMedia}</span>
                 </Link>
               </li>
             </ul>
@@ -107,7 +107,7 @@ export default function Footer({ t }) {
           {/* Company & Support */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Company
+              {t.footer.companyLinks}
             </h4>
             <ul className="space-y-2.5">
               <li>
@@ -116,8 +116,8 @@ export default function Footer({ t }) {
                 </Link>
               </li>
               <li>
-                <Link to="/why-us" className="hover:text-[#fec003] transition-colors">
-                  {t.nav.whyUs}
+                <Link to="/about-us" className="hover:text-[#fec003] transition-colors">
+                  {t.nav.aboutUs}
                 </Link>
               </li>
               <li>
@@ -127,7 +127,7 @@ export default function Footer({ t }) {
               </li>
               <li>
                 <a
-                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20konsultasi`}
+                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20berkonsultasi`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#fec003] hover:underline font-semibold"
@@ -138,10 +138,10 @@ export default function Footer({ t }) {
             </ul>
           </div>
 
-          {/* Social Channels */}
+          {/* Official Channels */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Official Channels
+              {t.footer.connectLinks}
             </h4>
             <div className="flex flex-wrap gap-2.5">
               {socialLinks.map((s, idx) => (
@@ -158,7 +158,7 @@ export default function Footer({ t }) {
               ))}
             </div>
             <p className="text-[11px] text-slate-400 mt-4 leading-relaxed">
-              Jakarta, Indonesia. Serving forward-thinking global businesses.
+              Jakarta, Indonesia. Serving forward-thinking businesses.
             </p>
           </div>
 
@@ -173,6 +173,7 @@ export default function Footer({ t }) {
           <button
             onClick={scrollToTop}
             className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-[#fec003]/40 text-slate-300 hover:text-[#fec003] transition-colors"
+            aria-label="Back to Top"
           >
             <span>{t.footer.backToTop}</span>
             <ArrowUp className="w-3.5 h-3.5" />

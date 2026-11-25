@@ -38,7 +38,7 @@ export default function WhyUs({ t }) {
           </p>
         </div>
 
-        {/* 4 Feature Cards */}
+        {/* 4 Value Cards (No Fake Statistics or Unverified Claims) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {data.cards.map((card, idx) => {
             const Icon = getIcon(card.icon);

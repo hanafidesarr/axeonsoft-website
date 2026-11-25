@@ -11,10 +11,12 @@ import { content } from './data/translations';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const BookingPage = lazy(() => import('./pages/BookingPage'));
+const EcommercePage = lazy(() => import('./pages/EcommercePage'));
+const SocialMediaPage = lazy(() => import('./pages/SocialMediaPage'));
+const AboutUsPage = lazy(() => import('./pages/AboutUsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const LandingPageService = lazy(() => import('./pages/LandingPageService'));
 const GamesPage = lazy(() => import('./pages/GamesPage'));
-const WhyUsPage = lazy(() => import('./pages/WhyUsPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 export default function App() {
@@ -34,13 +36,38 @@ export default function App() {
         <main className="flex-grow">
           <Suspense fallback={<PageLoader />}>
             <Routes>
+              {/* Homepage */}
               <Route path="/" element={<HomePage t={t} lang={lang} />} />
+
+              {/* Solution 1: Website Catalog */}
+              <Route path="/solutions/website-catalog" element={<CatalogPage t={t} lang={lang} />} />
               <Route path="/catalog" element={<CatalogPage t={t} lang={lang} />} />
+
+              {/* Solution 2: Online Booking */}
+              <Route path="/solutions/online-booking" element={<BookingPage t={t} lang={lang} />} />
               <Route path="/booking" element={<BookingPage t={t} lang={lang} />} />
+
+              {/* Solution 3: Ecommerce */}
+              <Route path="/solutions/ecommerce" element={<EcommercePage t={t} lang={lang} />} />
+              <Route path="/ecommerce" element={<EcommercePage t={t} lang={lang} />} />
+
+              {/* Solution 4: Social Media Management */}
+              <Route path="/solutions/social-media" element={<SocialMediaPage t={t} lang={lang} />} />
+              <Route path="/social-media" element={<SocialMediaPage t={t} lang={lang} />} />
+              <Route path="/social-media-management" element={<SocialMediaPage t={t} lang={lang} />} />
+
+              {/* Company: About Us & Why Us */}
+              <Route path="/about-us" element={<AboutUsPage t={t} lang={lang} />} />
+              <Route path="/why-us" element={<AboutUsPage t={t} lang={lang} />} />
+
+              {/* Contact */}
+              <Route path="/contact" element={<ContactPage t={t} lang={lang} />} />
+
+              {/* Secondary / Specialized Capabilities */}
               <Route path="/landing-page" element={<LandingPageService t={t} lang={lang} />} />
               <Route path="/games" element={<GamesPage t={t} lang={lang} />} />
-              <Route path="/why-us" element={<WhyUsPage t={t} lang={lang} />} />
-              <Route path="/contact" element={<ContactPage t={t} lang={lang} />} />
+
+              {/* 404 Catch-All */}
               <Route path="*" element={<NotFoundPage t={t} lang={lang} />} />
             </Routes>
           </Suspense>

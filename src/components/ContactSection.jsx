@@ -5,10 +5,10 @@ import {
   MapPin, 
   Send, 
   ExternalLink,
-  Sparkles,
-  PhoneCall
+  PhoneCall,
+  CheckCircle2
 } from 'lucide-react';
-import { socialLinks, officialWaLink, officialPhoneDisplay } from '../data/translations';
+import { socialLinks, officialWaLink, officialPhoneDisplay, officialEmail } from '../data/translations';
 import {
   InstagramIcon,
   YoutubeIcon,
@@ -21,14 +21,14 @@ export default function ContactSection({ t, lang }) {
 
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
-  const [formService, setFormService] = useState('E-Commerce / Digital Catalog');
+  const [formService, setFormService] = useState(data.formServiceOptions[0]);
   const [formMessage, setFormMessage] = useState('');
 
   const handleInquirySubmit = (e) => {
     e.preventDefault();
     const text = lang === 'en'
-      ? `Hello Axeonsoft Team!\n\nI would like to start a project inquiry:\n• Name: ${formName || 'Prospective Client'}\n• Email: ${formEmail || 'Not provided'}\n• Category: ${formService}\n• Details: ${formMessage || 'Looking forward to discussing further!'}`
-      : `Halo Tim Axeonsoft!\n\nSaya ingin berkonsultasi mengenai proyek digital:\n• Nama: ${formName || 'Calon Klien'}\n• Email: ${formEmail || 'Tidak dicantumkan'}\n• Kategori: ${formService}\n• Kebutuhan: ${formMessage || 'Mohon respon dan ketersediaan waktu untuk diskusi!'}`;
+      ? `Hello Axeonsoft Team!\n\nI would like to discuss a digital solution project:\n• Name: ${formName || 'Prospective Client'}\n• Email: ${formEmail || 'Not provided'}\n• Solution of Interest: ${formService}\n• Details: ${formMessage || 'Looking forward to discussing further!'}`
+      : `Halo Tim Axeonsoft!\n\nSaya ingin berkonsultasi mengenai solusi digital bisnis:\n• Nama: ${formName || 'Calon Klien'}\n• Email: ${formEmail || 'Tidak dicantumkan'}\n• Kategori Solusi: ${formService}\n• Deskripsi Kebutuhan: ${formMessage || 'Mohon respon untuk mendiskusikan kebutuhan bisnis kami!'}`;
 
     const url = `${officialWaLink}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
@@ -68,11 +68,11 @@ export default function ContactSection({ t, lang }) {
         {/* Top Split: WhatsApp Direct & Inquiry Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
           
-          {/* Left Column: Direct Contact & WhatsApp */}
+          {/* Left Column: Direct Verified Contact Info */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* WhatsApp Priority Card with 0851-7409-1042 */}
-            <div className="rounded-3xl bg-gradient-to-br from-amber-950/30 via-slate-900/95 to-slate-900 border border-[#fec003]/40 p-6 sm:p-8 shadow-xl">
+            {/* WhatsApp Priority Card */}
+            <div className="rounded-3xl bg-gradient-to-br from-amber-950/20 via-slate-900/95 to-slate-900 border border-[#fec003]/40 p-6 sm:p-8 shadow-xl">
               <div className="w-12 h-12 rounded-2xl bg-[#fec003]/20 text-[#fec003] flex items-center justify-center mb-4">
                 <WhatsAppIcon className="w-6 h-6" />
               </div>
@@ -85,7 +85,7 @@ export default function ContactSection({ t, lang }) {
 
               <div>
                 <a
-                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20tertarik%20dengan%20layanan%20Anda`}
+                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20mendiskusikan%20kebutuhan%20solusi%20digital`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-between p-4 rounded-xl bg-[#fec003]/15 hover:bg-[#fec003]/25 border border-[#fec003]/50 text-[#fec003] font-bold text-sm sm:text-base transition-all group shadow-md"
@@ -99,103 +99,107 @@ export default function ContactSection({ t, lang }) {
               </div>
             </div>
 
-            {/* Email & Location Mini Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a 
-                href={`mailto:${data.emailAddress}`}
-                className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-[#fec003]/40 transition-all block group"
-              >
-                <Mail className="w-5 h-5 text-[#fec003] mb-2 group-hover:scale-110 transition-transform" />
-                <div className="text-xs font-semibold text-slate-400 mb-1">{data.emailLabel}</div>
-                <div className="text-sm font-bold text-white group-hover:text-[#fec003] transition-colors">{data.emailAddress}</div>
-              </a>
+            {/* Email & Location Card */}
+            <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 text-[#fec003] flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{data.emailLabel}</h4>
+                  <a href={`mailto:${officialEmail}`} className="text-sm font-bold text-white hover:text-[#fec003] transition-colors">
+                    {officialEmail}
+                  </a>
+                </div>
+              </div>
 
-              <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <MapPin className="w-5 h-5 text-[#fec003] mb-2" />
-                <div className="text-xs font-semibold text-slate-400 mb-1">{data.locationLabel}</div>
-                <div className="text-xs font-medium text-slate-200">{data.locationValue}</div>
+              <div className="flex items-start gap-4 pt-4 border-t border-slate-800/80">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 text-[#fec003] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{data.locationLabel}</h4>
+                  <p className="text-sm font-medium text-slate-200">
+                    {data.locationValue}
+                  </p>
+                </div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Instant Project Inquiry Form */}
+          {/* Right Column: Inquiry Consultation Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-slate-900/70 border border-slate-800 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#fec003]" />
-                  <span>{lang === 'en' ? 'Start a Project Discussion' : 'Mulai Diskusi Kebutuhan Proyek'}</span>
-                </h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  {lang === 'en' 
-                    ? 'Fill in the details below and we will automatically format a WhatsApp message for instant chat.' 
-                    : 'Isi formulir singkat ini dan pesan akan otomatis diformat ke WhatsApp agar bisa langsung didiskusikan.'}
-                </p>
-              </div>
+            <div className="rounded-3xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
+              <h3 className="text-xl font-bold text-white mb-2">
+                {data.formTitle}
+              </h3>
+              <p className="text-xs text-slate-400 mb-6">
+                {data.formSubtitle}
+              </p>
 
               <form onSubmit={handleInquirySubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formName}
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Jane Doe"
-                      value={formName}
-                      onChange={(e) => setFormName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-[#fec003]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formEmail}
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="name@company.com"
-                      value={formEmail}
-                      onChange={(e) => setFormEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-[#fec003]"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formName} *
+                  </label>
+                  <input 
+                    type="text" 
+                    required
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    placeholder={lang === 'en' ? "Your full name" : "Nama lengkap Anda"}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formEmail}
+                  </label>
+                  <input 
+                    type="email" 
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                    placeholder="email@company.com"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
                     {data.formService}
                   </label>
-                  <select
+                  <select 
                     value={formService}
                     onChange={(e) => setFormService(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-[#fec003]"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-[#fec003] transition-colors"
                   >
-                    <option value="Product Catalog & E-Commerce">Product Catalog & E-Commerce</option>
-                    <option value="Online Booking & Reservation">Online Booking & Reservation</option>
-                    <option value="High-Converting Landing Page">High-Converting Landing Page</option>
-                    <option value="Catbox Studio Web Games & Gamification">Catbox Studio Web Games & Gamification</option>
-                    <option value="Custom Web Application & Enterprise">Custom Web Application & Enterprise</option>
+                    {data.formServiceOptions.map((opt, i) => (
+                      <option key={i} value={opt} className="bg-slate-900 text-white">
+                        {opt}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    {data.formMessage}
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formMessage} *
                   </label>
-                  <textarea
+                  <textarea 
                     rows={4}
-                    placeholder={lang === 'en' ? "Tell us about your project goals, timeline, and features..." : "Ceritakan gambaran singkat kebutuhan proyek, estimasi waktu, dan fitur utama..."}
+                    required
                     value={formMessage}
                     onChange={(e) => setFormMessage(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-[#fec003] resize-none"
+                    placeholder={lang === 'en' ? "Tell us about your business, current workflow, and what you aim to achieve..." : "Ceritakan profil bisnis, alur kerja saat ini, dan apa yang ingin Anda capai..."}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl font-bold text-sm text-slate-950 bg-[#fec003] hover:bg-[#ffd033] shadow-xl shadow-[#fec003]/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
+                  className="w-full py-4 rounded-xl bg-[#fec003] hover:bg-[#ffd033] text-slate-950 font-bold text-sm shadow-xl shadow-[#fec003]/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Send className="w-4 h-4 text-slate-950" />
                   <span>{data.formSubmit}</span>
@@ -206,39 +210,32 @@ export default function ContactSection({ t, lang }) {
 
         </div>
 
-        {/* Selected Official Channels (WhatsApp, Instagram, YouTube, TikTok only - LinkedIn, GitHub, Facebook, Twitter removed) */}
-        <div className="pt-10 border-t border-slate-800/80">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <h3 className="text-xl font-bold text-white mb-2">
-              {data.socialsTitle}
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
-              {data.socialsSubtitle}
-            </p>
-          </div>
+        {/* Social Channels Strip */}
+        <div className="pt-8 border-t border-slate-800/80">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h4 className="text-sm font-bold text-white mb-1">
+                {data.socialsTitle}
+              </h4>
+              <p className="text-xs text-slate-400">
+                {data.socialsSubtitle}
+              </p>
+            </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {socialLinks.map((social, index) => {
-              return (
+            <div className="flex items-center gap-3">
+              {socialLinks.map((s, idx) => (
                 <a
-                  key={index}
-                  href={social.url}
+                  key={idx}
+                  href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-[#fec003]/50 hover:bg-slate-850 transition-all duration-200 group text-center hover:-translate-y-1 shadow-md"
+                  title={s.name}
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-[#fec003] hover:border-[#fec003]/40 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-slate-800/80 group-hover:bg-[#fec003]/10 flex items-center justify-center mb-3 transition-colors">
-                    {renderSocialIcon(social.icon)}
-                  </div>
-                  <span className="text-sm font-bold text-white group-hover:text-[#fec003] transition-colors">
-                    {social.name}
-                  </span>
-                  <span className="text-xs text-slate-400 font-mono mt-1 truncate max-w-full">
-                    {social.handle}
-                  </span>
+                  {renderSocialIcon(s.icon)}
                 </a>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
 

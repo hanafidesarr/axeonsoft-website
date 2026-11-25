@@ -7,13 +7,12 @@ import {
   ExternalLink,
   Sparkles,
   PhoneCall,
-  Clock,
   ShieldCheck,
   CheckCircle2
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { socialLinks, officialWaLink, officialPhoneDisplay } from '../data/translations';
+import { socialLinks, officialWaLink, officialPhoneDisplay, officialEmail } from '../data/translations';
 import {
   InstagramIcon,
   YoutubeIcon,
@@ -26,20 +25,19 @@ export default function ContactPage({ t, lang }) {
 
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
-  const [formService, setFormService] = useState('E-Commerce / Digital Catalog');
-  const [formBudget, setFormBudget] = useState('Rp 5.000.000 - Rp 15.000.000');
+  const [formService, setFormService] = useState(data.formServiceOptions[0]);
   const [formMessage, setFormMessage] = useState('');
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact Axeonsoft - Official Software House Consultation",
-    "description": data.subtitle,
+    "name": t.seo.contact.title,
+    "description": t.seo.contact.description,
     "mainEntity": {
       "@type": "Organization",
       "name": "Axeonsoft",
       "telephone": "+6285174091042",
-      "email": "info@axeonsoft.com",
+      "email": officialEmail,
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Jakarta",
@@ -55,8 +53,8 @@ export default function ContactPage({ t, lang }) {
   const handleInquirySubmit = (e) => {
     e.preventDefault();
     const text = lang === 'en'
-      ? `Hello Axeonsoft Team!\n\nI would like to start a project inquiry:\n• Name: ${formName || 'Prospective Client'}\n• Email: ${formEmail || 'Not provided'}\n• Category: ${formService}\n• Estimated Budget: ${formBudget}\n• Details: ${formMessage || 'Looking forward to discussing further!'}`
-      : `Halo Tim Axeonsoft!\n\nSaya ingin berkonsultasi mengenai proyek digital:\n• Nama: ${formName || 'Calon Klien'}\n• Email: ${formEmail || 'Tidak dicantumkan'}\n• Kategori: ${formService}\n• Estimasi Anggaran: ${formBudget}\n• Kebutuhan: ${formMessage || 'Mohon respon dan ketersediaan waktu untuk diskusi!'}`;
+      ? `Hello Axeonsoft Team!\n\nI would like to start a project inquiry:\n• Name: ${formName || 'Prospective Client'}\n• Business Email: ${formEmail || 'Not provided'}\n• Primary Solution: ${formService}\n• Details: ${formMessage || 'Looking forward to discussing further!'}`
+      : `Halo Tim Axeonsoft!\n\nSaya ingin berkonsultasi mengenai solusi digital bisnis:\n• Nama: ${formName || 'Calon Klien'}\n• Email Bisnis: ${formEmail || 'Tidak dicantumkan'}\n• Kategori Solusi: ${formService}\n• Deskripsi Kebutuhan: ${formMessage || 'Mohon respon untuk mendiskusikan kebutuhan bisnis kami!'}`;
 
     const url = `${officialWaLink}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
@@ -86,76 +84,78 @@ export default function ContactPage({ t, lang }) {
       <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={breadcrumbs} />
 
-        {/* Hero Header */}
-        <div className="text-center max-w-3xl mx-auto my-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fec003]/10 border border-[#fec003]/30 text-[#fec003] text-xs font-semibold mb-4">
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mx-auto my-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fec003]/10 border border-[#fec003]/30 text-[#fec003] text-xs font-semibold mb-6">
             <MessageSquare className="w-3.5 h-3.5" />
             <span>{data.badge}</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4">
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
             {data.title}
           </h1>
-          <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-medium">
+
+          <p className="text-lg text-slate-300 leading-relaxed font-normal">
             {data.subtitle}
           </p>
         </div>
 
-        {/* Top Split: WhatsApp Priority Card & Inquiry Form */}
+        {/* Contact Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
           
-          {/* Left Column: Direct Contact & WhatsApp */}
+          {/* Left Column: Direct Info */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* WhatsApp Priority Card */}
-            <div className="rounded-3xl bg-gradient-to-br from-amber-950/30 via-slate-900/95 to-slate-900 border border-[#fec003]/40 p-6 sm:p-8 shadow-xl">
+            <div className="rounded-3xl bg-gradient-to-br from-amber-950/25 via-slate-900/95 to-slate-900 border border-[#fec003]/40 p-6 sm:p-8 shadow-xl">
               <div className="w-12 h-12 rounded-2xl bg-[#fec003]/20 text-[#fec003] flex items-center justify-center mb-4">
                 <WhatsAppIcon className="w-6 h-6" />
               </div>
-              <h2 className="text-xl font-bold text-white mb-2">
+              <h3 className="text-xl font-bold text-white mb-2">
                 {data.waTitle}
-              </h2>
-              <p className="text-xs text-slate-300 leading-relaxed mb-6">
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
                 {data.waDesc}
               </p>
 
-              <a
-                href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20konsultasi%20cepat`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#fec003] hover:bg-[#ffd033] text-slate-950 font-bold text-xs shadow-lg shadow-[#fec003]/25 transition-all transform hover:-translate-y-0.5"
-              >
-                <WhatsAppIcon className="w-4 h-4" />
-                <span>{data.waButton}</span>
-              </a>
-
-              <div className="pt-4 mt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-[#fec003]" />
-                  <span>Avg Response: &lt; 15 min</span>
-                </span>
-                <span className="flex items-center gap-1.5 text-emerald-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Online 24/7</span>
-                </span>
+              <div>
+                <a
+                  href={`${officialWaLink}?text=Halo%20Axeonsoft,%20saya%20ingin%20mendiskusikan%20kebutuhan%20solusi%20digital`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between p-4 rounded-xl bg-[#fec003]/15 hover:bg-[#fec003]/25 border border-[#fec003]/50 text-[#fec003] font-bold text-sm sm:text-base transition-all group shadow-md"
+                >
+                  <span className="flex items-center gap-3">
+                    <PhoneCall className="w-5 h-5 text-[#fec003]" />
+                    <span>{officialPhoneDisplay}</span>
+                  </span>
+                  <ExternalLink className="w-4 h-4 opacity-75 group-hover:translate-x-1 transition-transform" />
+                </a>
               </div>
             </div>
 
-            {/* Email & Location Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <Mail className="w-5 h-5 text-[#fec003] mb-3" />
-                <h3 className="text-xs text-slate-400 uppercase font-semibold mb-1">{data.emailLabel}</h3>
-                <a href={`mailto:${data.emailAddress}`} className="text-sm font-bold text-white hover:text-[#fec003] transition-colors break-all">
-                  {data.emailAddress}
-                </a>
+            <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 text-[#fec003] flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{data.emailLabel}</h4>
+                  <a href={`mailto:${officialEmail}`} className="text-sm font-bold text-white hover:text-[#fec003] transition-colors">
+                    {officialEmail}
+                  </a>
+                </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
-                <MapPin className="w-5 h-5 text-[#fec003] mb-3" />
-                <h3 className="text-xs text-slate-400 uppercase font-semibold mb-1">{data.locationLabel}</h3>
-                <p className="text-xs font-medium text-slate-300">
-                  {data.locationValue}
-                </p>
+              <div className="flex items-start gap-4 pt-4 border-t border-slate-800/80">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 text-[#fec003] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{data.locationLabel}</h4>
+                  <p className="text-sm font-medium text-slate-200">
+                    {data.locationValue}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -164,99 +164,75 @@ export default function ContactPage({ t, lang }) {
           {/* Right Column: Inquiry Form */}
           <div className="lg:col-span-7">
             <div className="rounded-3xl bg-slate-900/80 border border-slate-800 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
-              <div className="mb-6 pb-4 border-b border-slate-800">
-                <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-[#fec003]" />
-                  <span>{lang === 'en' ? 'Start Your Project Inquiry' : 'Formulir Konsultasi Proyek Baru'}</span>
-                </h2>
-                <p className="text-xs text-slate-400 mt-1">
-                  {lang === 'en' 
-                    ? 'Fill out this form and our team will craft a tailored proposal via WhatsApp.' 
-                    : 'Isi formulir ini dan tim solusi arsitek kami akan menyiapkan proposal langsung via WhatsApp.'}
-                </p>
-              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                {data.formTitle}
+              </h3>
+              <p className="text-xs text-slate-400 mb-6">
+                {data.formSubtitle}
+              </p>
 
               <form onSubmit={handleInquirySubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formName} *
-                    </label>
-                    <input 
-                      type="text"
-                      required
-                      placeholder="e.g. Alex Pratama"
-                      value={formName}
-                      onChange={(e) => setFormName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formEmail}
-                    </label>
-                    <input 
-                      type="email"
-                      placeholder="alex@company.com"
-                      value={formEmail}
-                      onChange={(e) => setFormEmail(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003]"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formService}
-                    </label>
-                    <select
-                      value={formService}
-                      onChange={(e) => setFormService(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white focus:outline-none focus:border-[#fec003]"
-                    >
-                      <option value="Product Catalog & E-Commerce">Product Catalog & E-Commerce</option>
-                      <option value="Online Booking System">Online Booking & Reservation System</option>
-                      <option value="High-Converting Landing Page">High-Converting Landing Page (CRO)</option>
-                      <option value="Catbox Studio Game Development">Catbox Studio Web Game / Gamification</option>
-                      <option value="Custom Enterprise Web Application">Custom Enterprise Web Application</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                      {data.formBudget}
-                    </label>
-                    <select
-                      value={formBudget}
-                      onChange={(e) => setFormBudget(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white focus:outline-none focus:border-[#fec003]"
-                    >
-                      <option value="< Rp 5.000.000">&lt; Rp 5.000.000 (Starter)</option>
-                      <option value="Rp 5.000.000 - Rp 15.000.000">Rp 5.000.000 - Rp 15.000.000 (Growth)</option>
-                      <option value="Rp 15.000.000 - Rp 35.000.000">Rp 15.000.000 - Rp 35.000.000 (Pro)</option>
-                      <option value="> Rp 35.000.000">&gt; Rp 35.000.000 (Enterprise)</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formName} *
+                  </label>
+                  <input 
+                    type="text" 
+                    required
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    placeholder={lang === 'en' ? "Your full name" : "Nama lengkap Anda"}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    {data.formMessage}
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formEmail}
+                  </label>
+                  <input 
+                    type="email" 
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                    placeholder="email@company.com"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formService}
+                  </label>
+                  <select 
+                    value={formService}
+                    onChange={(e) => setFormService(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white focus:outline-none focus:border-[#fec003] transition-colors"
+                  >
+                    {data.formServiceOptions.map((opt, i) => (
+                      <option key={i} value={opt} className="bg-slate-900 text-white">
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                    {data.formMessage} *
                   </label>
                   <textarea 
                     rows={4}
-                    placeholder={lang === 'en' ? "Tell us about your project vision, target audience, or desired launch deadline..." : "Ceritakan ide produk digital Anda, target pengguna, atau tenggat waktu peluncuran yang diinginkan..."}
+                    required
                     value={formMessage}
                     onChange={(e) => setFormMessage(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003]"
+                    placeholder={lang === 'en' ? "Tell us about your business, current workflow, and what you aim to achieve..." : "Ceritakan profil bisnis, alur kerja saat ini, dan apa yang ingin Anda capai..."}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#fec003] transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#fec003] hover:bg-[#ffd033] text-slate-950 text-xs font-bold shadow-xl shadow-[#fec003]/20 transition-all cursor-pointer"
+                  className="w-full py-4 rounded-xl bg-[#fec003] hover:bg-[#ffd033] text-slate-950 font-bold text-sm shadow-xl shadow-[#fec003]/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Send className="w-4 h-4 text-slate-950" />
                   <span>{data.formSubmit}</span>
@@ -267,38 +243,28 @@ export default function ContactPage({ t, lang }) {
 
         </div>
 
-        {/* Official Social Media Channels */}
-        <div>
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-2xl font-bold text-white mb-2">
+        {/* Social Channels */}
+        <div className="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 className="text-base font-bold text-white mb-1">
               {data.socialsTitle}
-            </h2>
+            </h3>
             <p className="text-xs text-slate-400">
               {data.socialsSubtitle}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {socialLinks.map((item, idx) => (
+          <div className="flex items-center gap-3">
+            {socialLinks.map((s, idx) => (
               <a
                 key={idx}
-                href={item.url}
+                href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-[#fec003]/50 transition-all flex items-center gap-4 group"
+                title={s.name}
+                className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-[#fec003] hover:border-[#fec003]/40 transition-colors"
               >
-                <div className="w-12 h-12 rounded-xl bg-slate-800 group-hover:bg-[#fec003]/20 flex items-center justify-center shrink-0 transition-colors">
-                  {renderSocialIcon(item.icon)}
-                </div>
-                <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-white group-hover:text-[#fec003] transition-colors flex items-center gap-1.5">
-                    <span>{item.name}</span>
-                    <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-[#fec003]" />
-                  </h3>
-                  <p className="text-xs text-slate-400 truncate">
-                    {item.handle}
-                  </p>
-                </div>
+                {renderSocialIcon(s.icon)}
               </a>
             ))}
           </div>
