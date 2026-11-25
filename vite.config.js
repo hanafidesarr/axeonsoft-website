@@ -124,8 +124,9 @@ function githubPagesSpaPlugin() {
 
       for (const item of routeConfigs) {
         const routeSegments = item.route.split('/').filter(Boolean)
-        const routeDir = path.join(distDir, ...routeSegments)
-        fs.mkdirSync(routeDir, { recursive: true })
+        const baseName = routeSegments.pop()
+        const parentDir = path.join(distDir, ...routeSegments)
+        fs.mkdirSync(parentDir, { recursive: true })
 
         let pageHtml = rawHtml
           .replace(/<title>.*?<\/title>/i, `<title>${item.title}</title>`)
@@ -140,12 +141,8 @@ function githubPagesSpaPlugin() {
           .replace(/<meta\s+name=["']twitter:description["']\s+content=["'].*?["']\s*\/?>/i, `<meta name="twitter:description" content="${item.description}" />`)
           .replace(/<meta\s+name=["']twitter:url["']\s+content=["'].*?["']\s*\/?>/i, `<meta name="twitter:url" content="${item.canonical}" />`)
 
-        // 1. Write /route/index.html (serves trailing slash /route/ with HTTP 200 OK)
-        fs.writeFileSync(path.join(routeDir, 'index.html'), pageHtml, 'utf-8')
-
-        // 2. Write /route.html (serves exact clean URL /route directly with HTTP 200 OK, avoiding 301 redirect)
-        const parentDir = path.dirname(routeDir)
-        const baseName = routeSegments[routeSegments.length - 1]
+        // Write clean .html file (e.g. dist/solutions/website-catalog.html)
+        // GitHub Pages directly serves clean URLs with HTTP 200 OK without any 301 trailing-slash redirect
         fs.writeFileSync(path.join(parentDir, `${baseName}.html`), pageHtml, 'utf-8')
       }
       console.log(`✓ Pre-rendered ${routeConfigs.length} static route directories for GitHub Pages HTTP 200 OK.`)
